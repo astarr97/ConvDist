@@ -31,7 +31,7 @@ IMPORTANT: In general, you must mask entire clades.  For example, for seals and 
 When computing PhyloP scores for the rel species, you must mask sea and river otters, in addition to the badgers, weasels, skunks, etc. as they are all in the related clade.
 You must do this even if you are not including them in the variant pulling for seals and walruses!
 
-Some notes before we begin.  Due to an unresolved bug in the phast code, phylop will occasionally error on single bases in large files, leading to no output for the entire file being computed on.
+Some notes before we begin.  Due to an unresolved bug in the phast v1.5 code (this is resolved in phast v1.7 which was released later, all computation was done with phast v1.5 for consistency though), phylop will occasionally error on single bases in large files, leading to no output for the entire file being computed on.
 To combat this issue, we split the genome into 10 megabase chunks that are computed in parallel.  Each 10 megabase chunk is further split into 1 megabase chunks that get turned into a deduplicated, masked maf file.
 Each of those 1 megabase chunks is further split into 1,000 base pair chunks.  These are what we compute PhyloP on.
 If one of those computations errors, there is a system to catch that error, split the 1,000 base pair file into single maf blocks, and compute on those.
