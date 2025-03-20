@@ -1,15 +1,4 @@
-IMPORTANT: When making the config file, it is vital that no species appears first in the list for related species or the outgroup more than once.  
-For example, you could have Tragulus_javanicus be the primary outgroup for both the clade containing horses and rhinos and the cetacean clade.
-However, during step (4) (see below) you would then need to pull the site for Tragulus_javanicus twice but halSNPs removes repeat species.
-You would then need to modify remHead_callConvDiv.py to add back the missing Tragulus_javanicus.
-I had to do this repeatedly (this is one example) but it is much easier to instead have Bos_taurus be the outgroup for the cetacean clade and 
-make Tragulus_javanicus be the outgroup for the horse and rhino clade.  This results in an essentially identical output but does not require fiddling with the code.
-
-IMPORTANT: For step (4), you may have used a PhyloP species that does not appear as one of the focal species.  In that case, you need to have a burn in triple of species.  For example, 
-if you used Mus_musculus for PhyloP but it is an outgroup, you can start off the string of species with "Mus_musculus,Mus_musculus,Mus_musculus;..." and then delete the comparisons that include
-Mus_musculus in the resulting file.  Importantly, you do not want Mus_musculus to be the primary related or outgroup species again because halSNPs does not output duplicate species.
-
-All code is written in python, it also requires cactus, phast, maftools, and bedops (or some other program that can convert wig to bed).  
+All code is written in python, it also requires cactus and phast.  
 
 This folder contains the pipeline to do various tests for convergent evolution, as well as decelerated evolution/positive selection for specific clades.
 The goal of the pipeline is to:
@@ -42,7 +31,7 @@ IMPORTANT: In general, you must mask entire clades.  For example, for seals and 
 When computing PhyloP scores for the rel species, you must mask sea and river otters, in addition to the badgers, weasels, skunks, etc. as they are all in the related clade.
 You must do this even if you are not including them in the variant pulling for seals and walruses!
 
-Some notes before we begin.  Due to an unresolved bug in the phast v1.5 code (this is resolved in phast v1.7 which was released later, all computation was done with phast v1.5 for consistency though), phylop will occasionally error on single bases in large files, leading to no output for the entire file being computed on.
+Some notes before we begin.  Due to an unresolved bug in the phast code, phylop will occasionally error on single bases in large files, leading to no output for the entire file being computed on.
 To combat this issue, we split the genome into 10 megabase chunks that are computed in parallel.  Each 10 megabase chunk is further split into 1 megabase chunks that get turned into a deduplicated, masked maf file.
 Each of those 1 megabase chunks is further split into 1,000 base pair chunks.  These are what we compute PhyloP on.
 If one of those computations errors, there is a system to catch that error, split the 1,000 base pair file into single maf blocks, and compute on those.
