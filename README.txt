@@ -163,3 +163,12 @@ To do this, we use the python script
 The goal of STEP 4 is to identify convergent/divergent sites and determine whether the related/outgroup for both clades/species of interest in the comparison has the same base
 Unfortunately, I have not figured out a good way to determine this (due to many sites being the reverse complement in one clade compared to another clade)
 As a result, we just pull the variants again this time just taking the primary focal, related, and outgroup species for the two clades/species of interest in the comparison.
+
+StatisticalTests contains the tests we can run on the output of this pipeline.  The first pair, run_fwc_pwc.py and run_fwc_pwc.sh compare the PhyloP scores of sites that are a unique
+nucleotide in the focal set of species and are invariant in that clade to those that are not invariant in that clade to better understand changes in selection on the branch of interest
+relative to all other branches that come after it.  You can then combine p-values across clades to test for convergence.  See the shell script and python script for implementation details.  
+
+The second pair, run_nearest_site.py and run_nearest_site.sh directly test for convergent evolution by comparing the PhyloP score of convergent/divergent sites to the nearest site 
+in which a change occurred only in one lineage.  It then combines p-values across all possible pairwise comparisons and combines the combined p-value for convergent and divergent.
+
+Finally, make_scripts.py and get_fdr.py can be used to do permutations for run_nearest_site.py in order to check that the FDR is well-calibrated (in all cases so far it has been).
