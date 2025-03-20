@@ -1,3 +1,15 @@
+IMPORTANT: You should not have a species appear more than once as the primary related or outgroup species in a particular set of species you want to compare.  For example,
+for the horse + rhino clade and cetaceans, you could reasonably have Tragulus_javanicus be the primary outgroup.  However, when you reach step(4) you will need to repull variants
+and Tragulus_javanicus will appear twice in the command for halSNPs.  halSNPs removes duplicate species, so this well then cause problems in remHead_callConvDiv.py and you would
+need to modify remHead_callConvDiv.py to add the second Tragulus_javanicus (I had to do this repeatedly).  Instead, it is much easier to just make Bos_taurus the primary outgroup for cetaceans 
+and keep Tragulus_javanicus as the primary outgroup for  the horse + rhino clade.  This will result in nearly identical output.
+
+IMPORTANT: 
+
+IMPORTANT: You will need to modify remHead_callConvDiv.py to not remove the thing after the first "." from the scaffold name for Nycticebus_pygmaeus due to it having a weird scaffold naming scheme.
+
+ComputingPhyloP and ComputingVariants just contains repeats of code in the main ConvDist folder to help with clarity.
+
 All code is written in python, it also requires cactus and phast.  
 
 This folder contains the pipeline to do various tests for convergent evolution, as well as decelerated evolution/positive selection for specific clades.
