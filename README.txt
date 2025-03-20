@@ -4,7 +4,10 @@ and Tragulus_javanicus will appear twice in the command for halSNPs.  halSNPs re
 need to modify remHead_callConvDiv.py to add the second Tragulus_javanicus (I had to do this repeatedly).  Instead, it is much easier to just make Bos_taurus the primary outgroup for cetaceans 
 and keep Tragulus_javanicus as the primary outgroup for  the horse + rhino clade.  This will result in nearly identical output.
 
-IMPORTANT: 
+IMPORTANT: You may want the PhyloP species to not be any of the focal species. That works fine, you just need to modify the string of species at step 4 to include a burn in of 
+the PhyloP species repeated three times (e.g. "Mus_musculus,Mus_musculus,Mus_musculus;...) where ... represents the remaining species triplets.  It is vital that the PhyloP species not
+appear as one of the primary related or outgroup species for any comparison for the same reason as above (no duplicate species for halSNPs). You will then need to delete all the 
+Mus_musculus containing segments of code from the resulting .sh files BUT be careful to retain the gzip lines for the FiltConv and FiltPoly files that back it up.
 
 IMPORTANT: You will need to modify remHead_callConvDiv.py to not remove the thing after the first "." from the scaffold name for Nycticebus_pygmaeus due to it having a weird scaffold naming scheme.
 
