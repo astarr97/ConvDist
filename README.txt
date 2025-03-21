@@ -172,3 +172,6 @@ The second pair, run_nearest_site.py and run_nearest_site.sh directly test for c
 in which a change occurred only in one lineage.  It then combines p-values across all possible pairwise comparisons and combines the combined p-value for convergent and divergent.
 
 Finally, make_scripts.py and get_fdr.py can be used to do permutations for run_nearest_site.py in order to check that the FDR is well-calibrated (in all cases so far it has been).
+
+The TSV files that contain all the variant information from the compute variants step are backed up.  Often, you'll want to pull out a different set of sites for some subset of species in an existing file.
+This is much faster/less computationally intensive than having to pull things from the hal file.  ComputingVariants_FromExistingTSV contains code to do this.
